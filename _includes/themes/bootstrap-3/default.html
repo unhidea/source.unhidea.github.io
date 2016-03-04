@@ -73,11 +73,9 @@
 	            <button type="submit" class="btn btn-default">Submit</button>
 	         </form>
               -->
-              {% capture link1 %}{{ site.baseurl_root }}{{ page.url }}{% endcapture %}
-              {% capture link2 %}{{ site.baseurl_root }}en{{ page.url }}{% endcapture %}
               <div class="navbar-right">
-                <a href='{{ link1 }}'>中文</a>|
-                <a href='{{ link2 }}'>English</a>
+                <a href='{{ site.baseurl_root }}/zh{{ page.url }}'>中文</a>|
+                <a href='{{ site.baseurl_root }}{{ page.url }}'>English</a>
               </div>
   	        </div><!-- /.navbar-collapse -->
 	    </div>

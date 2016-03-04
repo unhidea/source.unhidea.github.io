@@ -2,7 +2,7 @@
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md","History.md","Gemfile","Gemfile.lock","resetRSS.sh"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md","History.md","Gemfile","Gemfile.lock","resetRSS.sh","idea-crawler"]
 highlighter: rouge
 
 # Themes are encouraged to use these universal variables 
@@ -30,9 +30,11 @@ production_url : http://unhidea.github.io
 
 
 # jekyll-multiple-languages-plugin settings:
-languages: ["zh", "en" ]
+languages: ["en","zh" ]
 
 exclude_from_localizations: ["assets", "Gemfile", "favicon.ico", "LICENSE", "README.md"]
+
+base_url: /
 
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
