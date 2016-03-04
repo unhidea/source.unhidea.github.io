@@ -5,7 +5,7 @@ Created on 2 Mar 2016
 '''
 from ubuntu_sso.keyring.pykeyring import USERNAME
 from yaml import dump, load
-import os,requests, uuid
+import os,requests, uuid, md5, shutil 
 import json
 
 GITHUB_API="https://api.github.com/"
@@ -55,13 +55,8 @@ class Idea(object):
                 pass
         
     def addMetaData(self,meta_data):       
-        #TODO    
-        def getHashId(meta_data):
-            return str(uuid.uuid4()) 
-
-        id = getHashId(meta_data)
-        if not self.meta_datas.has_key(id):
-            self.meta_datas[id]=meta_data
+        if not self.meta_datas.has_key(meta_data["id"]):
+            self.meta_datas[meta_data["id"]]=meta_data
         return       
     
     def render(self,out_path):
@@ -72,11 +67,34 @@ class Idea(object):
         return
 
 def getMetaData(fork):            
-    #TODO
-    return dict(
-                name="test",
-                )
-                
+
+    def filterMetaDataFromHtml(html):
+        idx = html.find("<!--idea-meta")
+        if idx > -1:
+            html = html[(idx+13):]
+            idx = html.find("-->")
+            if idx > -1:
+                meta = html[:idx]
+                return meta 
+            else:
+                return None
+        else: 
+            return None
+    names = fork["full_name"].split("/")
+    gh_page_url = "http://"+names[0]+".github.io/"+names[1]+"/"
+    r = requests.get(gh_page_url)
+    meta_str = filterMetaDataFromHtml(r.text)
+
+    if meta_str:
+        m= md5.new() 
+        m.update(meta_str)
+        id = m.digest()
+        meta_data = load(meta_str) 
+        meta_data["id"]=id
+        return meta_data 
+    else:
+        return None 
+
 def getAllFolks(idea,fork): 
         idea.forks.append(fork)
         if fork["forks_count"] > 0 :
@@ -140,10 +158,19 @@ class IdeaCrawler(object):
                 self.ideas.append(idea)
                 idea.crawl()
     def render(self):
-        
+        #empty output_path
+        emptyDirectory(self.output_path)
         for idea in self.ideas:
             idea.render(self.output_path)
-                
+            pass
+
+def emptyDirectory(path):                
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            os.unlink(os.path.join(root, f))
+        for d in dirs:
+            shutil.rmtree(os.path.join(root, d))
+
 def getOrgsRepo(orgs_name):                     
     url = GITHUB_API+"orgs/"+orgs_name+"/repos"        
     return getUrl(url)        
