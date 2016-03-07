@@ -1,5 +1,28 @@
 global:
     title: "unhidea"
     welcome: "Welcom to Unhidea!"
+    idea_list: "idea list"
 idea: "idea"
 "Jekyll Introduction": "ss"
+
+#idea-begin
+ideas:
+  idea:
+    unhidea:
+      id: fxxx
+      name: idea
+      tags: a,b
+    aaronwwf:
+      id: bxxx
+      name: idea
+      tags: a,b,c
+  idea2:
+    unhidea:
+      id: fxxx
+      name: idea2
+      tags: a,b
+    aaronwwf:
+      id: bxxx
+      name: idea2
+      tags: a,b,c
+#idea-end

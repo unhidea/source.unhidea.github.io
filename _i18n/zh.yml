@@ -1,5 +1,28 @@
 global:
     title: "无捂吾悟"
     welcome: "欢迎来到无捂吾悟！"
+    idea_list: "点子列表"
 idea: "点子"
 #"Jekyll Introduction": "ss"
+
+#idea-begin
+ideas:
+  idea:
+    unhidea:
+      id: zhfxxx
+      name: 点子 
+      tags: zh,a,b
+    aaronwwf:
+      id: zhbxxx
+      name: 点子 
+      tags: zh,a,b,c
+  idea2:
+    unhidea:
+      id: zhfxxx
+      name: 点子2
+      tags: zh,a,b
+    aaronwwf:
+      id: zhbxxx
+      name: 点子2
+      tags: zh,a,b,c
+#idea-end

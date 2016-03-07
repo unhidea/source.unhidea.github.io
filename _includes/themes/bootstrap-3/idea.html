@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>{% t global.idea_list %} </h1>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    {{ content }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>{%t global.idea_list %}</h4>
+    <ul>
+    {% for idea in page.ideas %}
+      <li><a href="{{ site.baseurl}}/ideas/{{idea.name}}.html">{% t idea.title %}</a></li> 
+    {% endfor %}
+    </ul>
+  </div>
+</div>

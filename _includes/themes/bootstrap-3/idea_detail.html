@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>{% t global.idea_list %} </h1>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>{% t global.idea_all_version %}</h4>
+    <ul>
+    {% for idea in page.ideas %}
+      <li><a href="http://{{idea.fork}}.github.io/{{page.title}}">{% t idea.name %}</a>
+          <span>tags:{% t idea.tags %}</span> 
+      </li> 
+    {% endfor %}
+    </ul>
+  </div>
+</div>

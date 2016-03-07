@@ -12,4 +12,6 @@ Thumbs.db
 .rvmrc
 .settings
 .project
+.pydevproject
+idea-crawler/dist
 Gemfile.lock

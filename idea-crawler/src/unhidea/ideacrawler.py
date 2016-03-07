@@ -4,8 +4,8 @@ Created on 2 Mar 2016
 @author: aaron
 '''
 from ubuntu_sso.keyring.pykeyring import USERNAME
-from yaml import dump, load
-import os,requests, uuid, md5, shutil 
+from yaml import safe_dump, load
+import os,requests, uuid, hashlib, shutil 
 import json
 
 GITHUB_API="https://api.github.com/"
@@ -60,7 +60,7 @@ class Idea(object):
         return       
     
     def render(self,out_path):
-        out = dump(self.meta_datas.values()) 
+        out = safe_dump(self.meta_datas.values()) 
         f= open(os.path.join(out_path,self.name+".yml"),"w") 
         f.write(out)
         f.close()
@@ -86,11 +86,14 @@ def getMetaData(fork):
     meta_str = filterMetaDataFromHtml(r.text)
 
     if meta_str:
-        m= md5.new() 
+        m= hashlib.md5() 
         m.update(meta_str)
-        id = m.digest()
+        id =m.hexdigest()
         meta_data = load(meta_str) 
         meta_data["id"]=id
+        meta_data["language"]="en"
+        meta_data["url"]=gh_page_url
+        meta_data["fork"]=names[0]
         return meta_data 
     else:
         return None 
