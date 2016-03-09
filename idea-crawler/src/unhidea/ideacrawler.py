@@ -1,3 +1,5 @@
+#!/usr/bin/python -tt
+# -*- coding: utf-8 -*-
 '''
 Created on 2 Mar 2016
 
@@ -6,11 +8,13 @@ Created on 2 Mar 2016
 from ubuntu_sso.keyring.pykeyring import USERNAME
 from yaml import safe_dump, load
 import os,requests, uuid, hashlib, shutil 
-import json
+import json, codecs, io
 
 GITHUB_API="https://api.github.com/"
 CLIENT_ID="0a68d223de982e650c04"
 CLIENT_SECRET="399f6072804f110a031c7c67f7a8132700ad3af0"
+LANGUGES=["en","zh"]
+
 class Idea(object):
     def __init__(self,raw):
         self.raw = raw
@@ -49,8 +53,8 @@ class Idea(object):
             for parent in commit.getParents(): 
                 parent.addChildren(commit)
             for fork in commit.forks.values():
-                meta_data = getMetaData(fork)
-                if meta_data:
+                meta_datas = getMetaDatas(fork)
+                for meta_data in meta_datas:
                     self.addMetaData(meta_data)
                 pass
         
@@ -60,13 +64,14 @@ class Idea(object):
         return       
     
     def render(self,out_path):
-        out = safe_dump(self.meta_datas.values()) 
-        f= open(os.path.join(out_path,self.name+".yml"),"w") 
-        f.write(out)
+        out = safe_dump(self.meta_datas.values(),allow_unicode=True) 
+        print out
+        f= codecs.open(os.path.join(out_path,self.name+".yml"),"w",encoding="utf-8")
+        f.write(out.decode("utf-8"))
         f.close()
         return
 
-def getMetaData(fork):            
+def getMetaDatas(fork):            
 
     def filterMetaDataFromHtml(html):
         idx = html.find("<!--idea-meta")
@@ -80,23 +85,29 @@ def getMetaData(fork):
                 return None
         else: 
             return None
-    names = fork["full_name"].split("/")
-    gh_page_url = "http://"+names[0]+".github.io/"+names[1]+"/"
-    r = requests.get(gh_page_url)
-    meta_str = filterMetaDataFromHtml(r.text)
-
-    if meta_str:
-        m= hashlib.md5() 
-        m.update(meta_str)
-        id =m.hexdigest()
-        meta_data = load(meta_str) 
-        meta_data["id"]=id
-        meta_data["language"]="en"
-        meta_data["url"]=gh_page_url
-        meta_data["fork"]=names[0]
-        return meta_data 
-    else:
-        return None 
+    meta_datas = []
+    for lan in LANGUGES: 
+        names = fork["full_name"].split("/")
+        prefix = "" if lan == "en" else (lan+"/")# default language is en
+        gh_page_url = "http://"+names[0]+".github.io/"+names[1]+"/"+prefix
+        r = requests.get(gh_page_url)
+        if r.status_code == requests.codes.ok:
+            meta_str = filterMetaDataFromHtml(r.text) 
+            if meta_str:
+                m= hashlib.md5() 
+                m.update(meta_str.encode('utf-8'))
+                id =m.hexdigest()
+                meta_data = load(meta_str) 
+                meta_data["id"]=id
+                meta_data["language"]=lan
+                meta_data["url"]=gh_page_url
+                meta_data["fork"]=names[0]
+                meta_datas.append(meta_data)
+            else:
+                continue
+        else:
+            continue
+    return meta_datas
 
 def getAllFolks(idea,fork): 
         idea.forks.append(fork)

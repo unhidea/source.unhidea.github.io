@@ -2,27 +2,19 @@ global:
     title: "unhidea"
     welcome: "Welcom to Unhidea!"
     idea_list: "idea list"
+    idea_all_version: "all idea versions"
 idea: "idea"
 "Jekyll Introduction": "ss"
 
 #idea-begin
 ideas:
   idea:
-    unhidea:
-      id: fxxx
-      name: idea
-      tags: a,b
     aaronwwf:
-      id: bxxx
-      name: idea
-      tags: a,b,c
-  idea2:
+      id: 234fa1a716026ec4e65384d4e1561496
+      name: unhidea, ancester of all open-source ideas, changed a little
+      tags: idea, internet, opensource
     unhidea:
-      id: fxxx
-      name: idea2
-      tags: a,b
-    aaronwwf:
-      id: bxxx
-      name: idea2
-      tags: a,b,c
+      id: dd61c479c48384463acec780d30f539a
+      name: unhidea, ancester of all open-source ideas
+      tags: idea, internet, opensource
 #idea-end

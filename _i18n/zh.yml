@@ -2,27 +2,19 @@ global:
     title: "无捂吾悟"
     welcome: "欢迎来到无捂吾悟！"
     idea_list: "点子列表"
+    idea_all_version: "所有点子版本"
 idea: "点子"
 #"Jekyll Introduction": "ss"
 
 #idea-begin
 ideas:
   idea:
-    unhidea:
-      id: zhfxxx
-      name: 点子 
-      tags: zh,a,b
     aaronwwf:
-      id: zhbxxx
-      name: 点子 
-      tags: zh,a,b,c
-  idea2:
+      id: 7fc3d9a25e364a61257f6b4f3e14e1bb
+      name: 无捂吾悟，初始点子，修改一点
+      tags: 点子， 开源， 互联网
     unhidea:
-      id: zhfxxx
-      name: 点子2
-      tags: zh,a,b
-    aaronwwf:
-      id: zhbxxx
-      name: 点子2
-      tags: zh,a,b,c
+      id: b8d0f6152e8a18ab1373c1a108601d1c
+      name: 无捂吾悟，初始点子
+      tags: 点子， 开源， 互联网
 #idea-end
