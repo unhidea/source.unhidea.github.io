@@ -3,6 +3,7 @@ global:
     welcome: "Welcom to Unhidea!"
     idea_list: "idea list"
     idea_all_version: "all idea versions"
+    about: "about"
 idea: "idea"
 "Jekyll Introduction": "ss"
 

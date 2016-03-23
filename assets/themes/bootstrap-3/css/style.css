@@ -14,3 +14,7 @@
   float: right; }*/
 
 /* Jekyll Bootstrap Colors */
+
+.navbar-right {
+    padding:15px;
+}

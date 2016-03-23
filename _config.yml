@@ -8,7 +8,7 @@ highlighter: rouge
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Unhidea 
+title : global.title 
 tagline: idea, opensource, share 
 author :
   name : Aaron wwf 
@@ -28,6 +28,9 @@ markdown: kramdown
 #
 production_url : http://unhidea.github.io
 
+navs:
+  - title: global.about
+    url: about.html
 
 # jekyll-multiple-languages-plugin settings:
 languages: ["en","zh" ]
@@ -122,8 +125,8 @@ JB :
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
   #
-  #   pages_list :
-  #     provider : "custom"   
+  pages_list :
+    provider : "custom"   
   #
   # Setting any helper's provider to 'custom' will bypass the helper code
   # and include your custom code. Your custom file must be defined at:

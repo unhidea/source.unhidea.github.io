@@ -1,0 +1,7 @@
+{% for node in site.navs %} 
+    {% if page.url == node.url %}
+    <li class="active"><a href="{{ BASE_PATH }}{{node.url}}" class="active">{% t node.title %}</a></li>
+    {% else %}
+    <li><a href="{{ BASE_PATH }}{{node.url}}">{% t node.title %}</a></li>
+    {% endif %}
+{% endfor %}

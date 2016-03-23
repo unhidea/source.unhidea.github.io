@@ -3,6 +3,7 @@ global:
     welcome: "欢迎来到无捂吾悟！"
     idea_list: "点子列表"
     idea_all_version: "所有点子版本"
+    about: "关于"
 idea: "点子"
 #"Jekyll Introduction": "ss"
 
