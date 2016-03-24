@@ -22,4 +22,4 @@
 
 ###怎么做###
 
-请参照第一个[“点子”](http://unhidea.github.io/idea)
+请参照第一个[“点子”](http://unhidea.github.io/idea/zh)
